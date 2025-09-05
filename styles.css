@@ -1,20 +1,20 @@
 :root {
-    --bg-color: #f5f3ff;
+    --bg-color: #ecfeff;
     --container-bg: #ffffff;
-    --text-color: #4c1d95;
-    --header-color: #2e1065;
-    --primary-color: #7c3aed;
-    --primary-hover: #6d28d9;
-    --accent-color: #ec4899;
-    --accent-hover: #db2777;
+    --text-color: #083344;
+    --header-color: #042f2e;
+    --primary-color: #2dd4bf;
+    --primary-hover: #14b8a6;
+    --accent-color: #f472b6;
+    --accent-hover: #ec4899;
     --shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 body.dark {
-    --bg-color: #2e1065;
-    --container-bg: #4c1d95;
-    --text-color: #e9d5ff;
-    --header-color: #ede9fe;
+    --bg-color: #083344;
+    --container-bg: #164e63;
+    --text-color: #e0f2fe;
+    --header-color: #cffafe;
     --shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
@@ -25,17 +25,25 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background: linear-gradient(135deg, var(--bg-color), #ddd6fe);
+    background: linear-gradient(135deg, var(--bg-color), #a5f3fc);
     color: var(--text-color);
+    animation: gradientShift 10s ease infinite;
     transition: background 0.3s ease;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .container {
     text-align: center;
     padding: 2rem;
     background: var(--container-bg);
-    border-radius: 16px;
-    border: 2px solid var(--primary-color);
+    border-radius: 20px;
+    border: 2px solid transparent;
+    border-image: linear-gradient(to right, var(--primary-color), var(--accent-color)) 1;
     box-shadow: var(--shadow);
     max-width: 90%;
     width: 700px;
@@ -45,6 +53,7 @@ h1 {
     font-size: 2.2rem;
     font-weight: 600;
     color: var(--header-color);
+    letter-spacing: 0.05rem;
     margin-bottom: 0.5rem;
 }
 
@@ -53,6 +62,7 @@ h1 {
     color: var(--text-color);
     opacity: 0.85;
     margin-bottom: 1.5rem;
+    font-weight: 300;
 }
 
 label {
@@ -65,9 +75,9 @@ label {
 #modeSelect, #categorySelect {
     padding: 0.7rem;
     font-size: 1rem;
-    border: 1px solid #d8b4fe;
+    border: 1px solid #a5f3fc;
     border-radius: 10px;
-    background: #f5f3ff;
+    background: #f0f9ff;
     width: 100%;
     max-width: 320px;
     margin: 0.5rem auto;
@@ -77,7 +87,7 @@ label {
 #modeSelect:focus, #categorySelect:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.2);
+    box-shadow: 0 0 0 4px rgba(45, 212, 191, 0.2);
 }
 
 #quoteOptions {
@@ -86,7 +96,7 @@ label {
 }
 
 details[open] summary ~ * {
-    animation: slideDown 0.3s ease-in-out;
+    animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 summary {
@@ -98,7 +108,7 @@ summary {
     border-radius: 10px;
     background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
     margin-bottom: 0.5rem;
-    transition: background 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 summary:hover {
@@ -106,6 +116,7 @@ summary:hover {
 }
 
 summary i {
+    font-size: 1.2rem;
     margin-right: 0.5rem;
     transition: transform 0.3s ease;
 }
@@ -124,18 +135,18 @@ details[open] summary i {
 #customInput {
     padding: 0.7rem;
     font-size: 1rem;
-    border: 1px solid #d8b4fe;
+    border: 1px solid #a5f3fc;
     border-radius: 10px;
     flex: 1;
     min-width: 200px;
-    background: #f5f3ff;
+    background: #f0f9ff;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #customInput:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.2);
+    box-shadow: 0 0 0 4px rgba(45, 212, 191, 0.2);
 }
 
 #addBtn, #generateBtn, #shareBtn {
@@ -148,6 +159,23 @@ details[open] summary i {
     transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
+#addBtn:hover, #generateBtn:hover, #shareBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(45, 212, 191, 0.5);
+    animation: pulse 1.5s infinite;
+}
+
+#addBtn:active, #generateBtn:active, #shareBtn:active {
+    transform: scale(0.95);
+    background: var(--primary-hover);
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.5); }
+    70% { box-shadow: 0 0 0 10px rgba(45, 212, 191, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
+}
+
 #generateBtn {
     background: var(--primary-color);
     color: white;
@@ -158,12 +186,6 @@ details[open] summary i {
 
 #generateBtn:hover {
     background: var(--primary-hover);
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
-}
-
-#generateBtn:active {
-    transform: scale(0.95);
 }
 
 #addBtn {
@@ -173,12 +195,16 @@ details[open] summary i {
 
 #addBtn:hover {
     background: var(--accent-hover);
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
 }
 
-#addBtn:active {
-    transform: scale(0.95);
+#shareBtn {
+    background: #6b7280;
+    color: white;
+    margin: 0.5rem auto;
+}
+
+#shareBtn:hover {
+    background: #4b5563;
 }
 
 #modeDescription {
@@ -186,10 +212,11 @@ details[open] summary i {
     color: var(--text-color);
     opacity: 0.8;
     margin: 0.5rem 0;
+    font-weight: 300;
 }
 
 #outputDisplay {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     margin: 1.5rem 0;
     color: var(--text-color);
     min-height: 60px;
@@ -198,20 +225,30 @@ details[open] summary i {
 
 #outputDisplay.card {
     background: var(--container-bg);
-    padding: 1rem;
+    padding: 1.5rem;
     border-radius: 12px;
-    border: 1px solid #d8b4fe;
+    border: 2px solid transparent;
+    border-image: linear-gradient(to right, var(--primary-color), var(--accent-color)) 1;
     box-shadow: var(--shadow);
     animation: cardPop 0.3s ease;
 }
 
-#outputDisplay img, #outputDisplay video, #outputDisplay audio {
+#outputDisplay.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+#outputDisplay img, #outputDisplay video {
     max-width: 100%;
     height: auto;
     border-radius: 12px;
+    border: 1px solid #e5e7eb;
     margin-top: 0.5rem;
-    transition: opacity 0.5s ease-in-out;
-    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+#outputDisplay img:hover {
+    transform: scale(1.02);
 }
 
 #outputDisplay video {
@@ -221,6 +258,8 @@ details[open] summary i {
 #outputDisplay audio {
     width: 100%;
     max-width: 320px;
+    border-radius: 12px;
+    margin-top: 0.5rem;
 }
 
 #outputDisplay p {
@@ -229,6 +268,7 @@ details[open] summary i {
     opacity: 0.9;
     margin-top: 0.5rem;
     text-align: center;
+    font-weight: 300;
 }
 
 #outputDisplay.fade {
@@ -241,12 +281,35 @@ details[open] summary i {
     color: var(--text-color);
     opacity: 0.7;
     margin-top: 0.5rem;
+    background: #f0f0f0;
+    padding: 0.5rem;
+    border-radius: 8px;
+    display: inline-block;
+    animation: fadeIn 0.5s ease;
+}
+
+body.dark #randomInfo {
+    background: #1f2937;
 }
 
 #loading {
     font-size: 1rem;
     color: var(--primary-color);
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+#loading::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--primary-color);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
 }
 
 #themeToggle {
@@ -276,6 +339,11 @@ details[open] summary i {
 
 #themeToggle i {
     margin-right: 0.3rem;
+    transition: transform 0.3s ease;
+}
+
+#themeToggle:active i {
+    transform: rotate(360deg);
 }
 
 @keyframes slideDown {
@@ -300,10 +368,20 @@ details[open] summary i {
     }
 }
 
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 0.7; }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
 @media (max-width: 600px) {
     .container {
-        padding: 1.5rem;
+        padding: 1rem;
         width: 95%;
+        border-radius: 16px;
     }
 
     h1 {
@@ -323,7 +401,7 @@ details[open] summary i {
     #generateBtn, #addBtn, #shareBtn {
         font-size: 0.9rem;
         padding: 0.6rem 1.2rem;
-        min-height: 44px;
+        min-height: 48px;
     }
 
     #themeToggle {
@@ -352,4 +430,28 @@ details[open] summary i {
     summary {
         padding: 0.6rem;
     }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0.8rem;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .tagline {
+        font-size: 0.9rem;
+    }
+}
+
+/* Accessibility */
+#modeSelect:focus, #categorySelect:focus, #customInput:focus, #addBtn:focus, #generateBtn:focus, #shareBtn:focus, #themeToggle:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+details[open] summary {
+    aria-expanded: true;
 }
